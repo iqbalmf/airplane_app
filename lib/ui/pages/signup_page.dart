@@ -17,24 +17,21 @@ class _SIgnUpPageState extends State<SIgnUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: ColorsApp.primaryColor,
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: ColorsApp.backgroundApp,
-          body: SingleChildScrollView(
-            child: ListView(
-              shrinkWrap: true,
-              primary: false,
-              padding: EdgeInsets.symmetric(
-                horizontal: defaultMargin,
-              ),
-              children: [
-                title(),
-                inputSection(),
-                tacButton(),
-              ],
+    return Scaffold(
+      backgroundColor: ColorsApp.backgroundApp,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: ListView(
+            shrinkWrap: true,
+            primary: false,
+            padding: EdgeInsets.symmetric(
+              horizontal: defaultMargin,
             ),
+            children: [
+              title(),
+              inputSection(),
+              tacButton(),
+            ],
           ),
         ),
       ),
