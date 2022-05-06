@@ -1,3 +1,4 @@
+import 'package:airplane_app/common/colors.dart';
 import 'package:flutter/material.dart';
 
 class BookingPage extends StatefulWidget {
@@ -10,8 +11,11 @@ class BookingPage extends StatefulWidget {
 class _BookingPageState extends State<BookingPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Container(
-      child: Text('Booking Page'),
-    ));
+    return Scaffold(
+      backgroundColor: ColorsApp.backgroundApp,
+      body: Center(
+        child: Text('Booking Ticket'),
+      ),
+    );
   }
 }

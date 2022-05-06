@@ -7,6 +7,7 @@ import 'package:airplane_app/ui/pages/booking_page.dart';
 import 'package:airplane_app/ui/pages/home_page.dart';
 import 'package:airplane_app/ui/pages/payment_page.dart';
 import 'package:airplane_app/ui/pages/settings_page.dart';
+import 'package:airplane_app/ui/widget/custom_bottomnavigation_item.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -17,7 +18,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int currentIndex = 0;
+  late STATUS_MENU currentIndex = STATUS_MENU.BROWSE;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class _MainPageState extends State<MainPage> {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.only(
-          bottom: 30, left: defaultMargin, right: defaultMargin),
+          bottom: 25, left: defaultMargin, right: defaultMargin),
       height: 60,
       decoration: BoxDecoration(
           color: ColorsApp.whiteColor,
@@ -40,145 +41,55 @@ class _MainPageState extends State<MainPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          GestureDetector(
+          CustomBottomNavigationItem(
+            icons: IconAssets.iconBrowse,
             onTap: () {
-              setState(() {
-                currentIndex = 0;
-              });
+              _setActiveMenu(STATUS_MENU.BROWSE);
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(),
-                Container(
-                  width: 24,
-                  height: 24,
-                  child: Image.asset(
-                    IconAssets.iconBrowse,
-                    color: currentIndex == 0 ? ColorsApp.primaryColor : null,
-                    width: 21,
-                  ),
-                ),
-                Container(
-                  width: 30,
-                  height: 2,
-                  decoration: BoxDecoration(
-                      color: currentIndex == 0
-                          ? ColorsApp.primaryColor
-                          : ColorsApp.transparentColor,
-                      borderRadius: BorderRadius.circular(18)),
-                )
-              ],
-            ),
+            isSelected: STATUS_MENU.BROWSE == currentIndex,
           ),
-          GestureDetector(
+          CustomBottomNavigationItem(
+              icons: IconAssets.iconBooked,
+              onTap: () {
+                _setActiveMenu(STATUS_MENU.BOOKED);
+              },
+              isSelected: STATUS_MENU.BOOKED == currentIndex),
+          CustomBottomNavigationItem(
+            icons: IconAssets.iconPayment,
             onTap: () {
-              setState(() {
-                currentIndex = 1;
-              });
+              _setActiveMenu(STATUS_MENU.PAYMENT);
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(),
-                Container(
-                  width: 24,
-                  height: 24,
-                  child: Image.asset(
-                    IconAssets.iconBooked,
-                    color: currentIndex == 1 ? ColorsApp.primaryColor : null,
-                    width: 21,
-                  ),
-                ),
-                Container(
-                  width: 30,
-                  height: 2,
-                  decoration: BoxDecoration(
-                      color: currentIndex == 1
-                          ? ColorsApp.primaryColor
-                          : ColorsApp.transparentColor,
-                      borderRadius: BorderRadius.circular(18)),
-                )
-              ],
-            ),
+            isSelected: STATUS_MENU.PAYMENT == currentIndex,
           ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                currentIndex = 2;
-              });
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(),
-                Container(
-                  width: 24,
-                  height: 24,
-                  child: Image.asset(
-                    IconAssets.iconPayment,
-                    color: currentIndex == 2 ? ColorsApp.primaryColor : null,
-                    width: 21,
-                  ),
-                ),
-                Container(
-                  width: 30,
-                  height: 2,
-                  decoration: BoxDecoration(
-                      color: currentIndex == 2
-                          ? ColorsApp.primaryColor
-                          : ColorsApp.transparentColor,
-                      borderRadius: BorderRadius.circular(18)),
-                )
-              ],
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                currentIndex = 3;
-              });
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(),
-                Container(
-                  width: 24,
-                  height: 24,
-                  child: Image.asset(
-                    IconAssets.iconSettings,
-                    color: currentIndex == 3 ? ColorsApp.primaryColor : null,
-                    width: 21,
-                  ),
-                ),
-                Container(
-                  width: 30,
-                  height: 2,
-                  decoration: BoxDecoration(
-                      color: currentIndex == 3
-                          ? ColorsApp.primaryColor
-                          : ColorsApp.transparentColor,
-                      borderRadius: BorderRadius.circular(18)),
-                )
-              ],
-            ),
-          ),
+          CustomBottomNavigationItem(
+              icons: IconAssets.iconSettings,
+              onTap: () {
+                _setActiveMenu(STATUS_MENU.SETTINGS);
+              },
+              isSelected: STATUS_MENU.SETTINGS == currentIndex),
         ],
       ),
     );
   }
 
-  Widget bodyPage(){
-    switch(currentIndex) {
-      case 1:
+  Widget bodyPage() {
+    switch (currentIndex) {
+      case STATUS_MENU.BOOKED:
         return BookingPage();
-      case 2:
+      case STATUS_MENU.PAYMENT:
         return PaymentPage();
-      case 3:
+      case STATUS_MENU.SETTINGS:
         return SettingsPage();
       default:
         return HomePage();
     }
   }
+
+  void _setActiveMenu(STATUS_MENU menus) {
+    setState(() {
+      currentIndex = menus;
+    });
+  }
 }
+
+enum STATUS_MENU { BROWSE, BOOKED, PAYMENT, SETTINGS }
