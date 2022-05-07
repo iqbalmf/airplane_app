@@ -1,5 +1,6 @@
 import 'package:airplane_app/common/colors.dart';
 import 'package:airplane_app/common/textstyle.dart';
+import 'package:airplane_app/ui/widget/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 import '../../routes.dart';
@@ -50,137 +51,6 @@ class _SIgnUpPageState extends State<SIgnUpPage> {
   }
 
   Widget inputSection() {
-    Widget nameInput() {
-      return Container(
-        margin: EdgeInsets.only(bottom: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Full Name'),
-            SizedBox(
-              height: 6,
-            ),
-            TextFormField(
-              cursorColor: ColorsApp.blackColor,
-              decoration: InputDecoration(
-                hintText: 'Input your name',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(defaultRadius),
-                ),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(defaultRadius),
-                    borderSide: BorderSide(color: ColorsApp.primaryColor)),
-              ),
-            )
-          ],
-        ),
-      );
-    }
-
-    Widget emailInput() {
-      return Container(
-        margin: EdgeInsets.only(bottom: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Email Address'),
-            SizedBox(
-              height: 6,
-            ),
-            TextFormField(
-              cursorColor: ColorsApp.blackColor,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                hintText: 'Your email address',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(defaultRadius),
-                ),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(defaultRadius),
-                    borderSide: BorderSide(color: ColorsApp.primaryColor)),
-              ),
-            )
-          ],
-        ),
-      );
-    }
-
-    Widget passwordInput() {
-      return Container(
-        margin: EdgeInsets.only(bottom: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Password'),
-            SizedBox(
-              height: 6,
-            ),
-            TextFormField(
-              cursorColor: ColorsApp.blackColor,
-              obscureText: _showPass,
-              decoration: InputDecoration(
-                  hintText: 'Your Password',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(defaultRadius),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(defaultRadius),
-                      borderSide: BorderSide(color: ColorsApp.primaryColor)),
-                  suffixIcon: IconButton(
-                    color: ColorsApp.primaryColor,
-                    icon: Icon(
-                      _showPass ? Icons.visibility : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _showPass = !_showPass;
-                      });
-                    },
-                  )),
-            )
-          ],
-        ),
-      );
-    }
-
-    Widget passwordReInput() {
-      return Container(
-        margin: EdgeInsets.only(bottom: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Re-Password'),
-            SizedBox(
-              height: 6,
-            ),
-            TextFormField(
-              cursorColor: ColorsApp.blackColor,
-              obscureText: _showRePass,
-              decoration: InputDecoration(
-                  hintText: 'Confirm Your Password',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(defaultRadius),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(defaultRadius),
-                      borderSide: BorderSide(color: ColorsApp.primaryColor)),
-                  suffixIcon: IconButton(
-                    color: ColorsApp.primaryColor,
-                    icon: Icon(
-                      _showRePass ? Icons.visibility : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _showRePass = !_showRePass;
-                      });
-                    },
-                  )),
-            )
-          ],
-        ),
-      );
-    }
-
     Widget buttonSignUp() {
       return Container(
         width: double.infinity,
@@ -213,10 +83,40 @@ class _SIgnUpPageState extends State<SIgnUpPage> {
           borderRadius: BorderRadius.circular(defaultRadius)),
       child: Column(
         children: [
-          nameInput(),
-          emailInput(),
-          passwordInput(),
-          passwordReInput(),
+          CustomTextFormField(
+            title: 'Full Name',
+            hintText: 'Input your name',
+            onPressed: () {},
+          ),
+          CustomTextFormField(
+              title: 'Email Address',
+              hintText: 'your email address',
+              keyboardType: TextInputType.emailAddress,
+              onPressed: () {}),
+          CustomTextFormField(
+            title: 'Your Password',
+            hintText: 'input your password',
+            keyboardType: TextInputType.visiblePassword,
+            obscureText: _showPass,
+            isPasswordType: true,
+            onPressed: () {
+              setState(() {
+                _showPass = !_showPass;
+              });
+            },
+          ),
+          CustomTextFormField(
+            title: 'Re-Password',
+            hintText: 'confirm your password',
+            keyboardType: TextInputType.visiblePassword,
+            obscureText: _showRePass,
+            isPasswordType: true,
+            onPressed: () {
+              setState(() {
+                _showRePass = !_showRePass;
+              });
+            },
+          ),
           buttonSignUp()
         ],
       ),
