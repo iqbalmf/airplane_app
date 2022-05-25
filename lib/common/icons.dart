@@ -9,6 +9,7 @@ class IconAssets {
 
   //image
   static const String iconPlane = '$_basePath/icon_plane.png';
+  static const String iconStar = '$_basePath/icon_star.png';
   static const String imageCard = '$_basePath/image_card.png';
   static const String imageBooked = '$_basePath/image_booked.png';
   static const String imageConfirmPay = '$_basePath/image_confirm_pay.png';

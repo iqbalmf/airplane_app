@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 FontWeight light = FontWeight.w300;
 FontWeight _regular = FontWeight.w400;
-FontWeight _medium = FontWeight.w500;
+FontWeight medium = FontWeight.w500;
 FontWeight semiBold = FontWeight.w600;
 FontWeight _bold = FontWeight.w700;
 FontWeight _boldest = FontWeight.w900;
